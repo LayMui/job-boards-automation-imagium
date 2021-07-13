@@ -49,7 +49,8 @@ public class AddJobStepDefinitions {
     String scrBase64 = "";
 
     public void takeScreenshot(String testName) {
-        uid = imagium.getUID(testName,  System.getenv("IMAGIUM_API_KEY"));
+       // uid = imagium.getUID(testName,  System.getenv("IMAGIUM_API_KEY"));
+        uid = imagium.getUID(testName, "cd827532-cb61-4082-be3a-a331e0822cbd");
         scrBase64 = ((TakesScreenshot) navigationPage.getDriver()).getScreenshotAs(OutputType.BASE64);
         
         try {
@@ -81,6 +82,7 @@ public class AddJobStepDefinitions {
     @When("^(?:.*) add a new job with name \"([^\"]*)\" duration \"([^\"]*)\" and \"([^\"]*)\"")
     public void jamesAddANewJobWithNameDurationAnd(String name, String duration, String date) {
          theActorInTheSpotlight().attemptsTo(Click.on(NavigationPage.ADD_JOB));
+         takeScreenshot("Adding Job");
          theActorInTheSpotlight().attemptsTo(Add.jobName(name));
          theActorInTheSpotlight().attemptsTo
          (SelectFromOptions.byVisibleText(duration).from(AddJobPage.JOB_DURATION));
