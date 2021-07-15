@@ -1,4 +1,4 @@
-Feature: Add Job
+Business Need: Add Job
   In order to add a new job to the listing
   As a job seeker James
   James wants to able to add a job

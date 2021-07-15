@@ -81,6 +81,7 @@ public class AddJobStepDefinitions {
     
     @When("^(?:.*) add a new job with name \"([^\"]*)\" duration \"([^\"]*)\" and \"([^\"]*)\"")
     public void jamesAddANewJobWithNameDurationAnd(String name, String duration, String date) {
+        
          theActorInTheSpotlight().attemptsTo(Click.on(NavigationPage.ADD_JOB));
          takeScreenshot("Adding Job");
          theActorInTheSpotlight().attemptsTo(Add.jobName(name));
