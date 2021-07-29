@@ -53,16 +53,6 @@ public class AddJobStepDefinitions {
     Imagium imagium;
 
     static String uuid;
-    public void takeScreenshot(String testName) {
-        String scrBase64 = "";
-        scrBase64 = ((TakesScreenshot) navigationPage.getDriver()).getScreenshotAs(OutputType.BASE64);
-        try {
-            log.info("UUID: " + uuid);
-            imagium.postRequest(testName, uuid, scrBase64);
-        } catch(Exception e) {
-            log.info("Exception caught");
-        }
-    }
 
     @Before()
     public void setTheStage() {
@@ -83,7 +73,7 @@ public class AddJobStepDefinitions {
         theActorCalled("james").attemptsTo(Open.browserOn().the(navigationPage));
         ((JavascriptExecutor) navigationPage.getDriver()).
         executeScript("function is_gif_image(i) {\n  return /^(?!data:).*\\.gif/i.test(i.src);\n}\n\nfunction freeze_gif(i) {\n  var c = document.createElement('canvas');\n  var w = c.width = i.width;\n var h = c.height = i.height;\n  c.getContext('2d').drawImage(i, 0, 0, w, h);\n  try {\n    i.src = c.toDataURL(\"image/gif\"); // if possible, retain all css aspects\n  } catch(e) { // cross-domain -- mimic original with all its tag attributes\n    for (var j = 0, a; a = i.attributes[j]; j++)\n      c.setAttribute(a.name, a.value);\n    i.parentNode.replaceChild(c, i);\n  }\n}\n\n\n[].slice.apply(document.images).filter(is_gif_image).map(freeze_gif);");
-        takeScreenshot("Jobs Listing");
+        imagium.takeScreenshot(navigationPage.getDriver(), uuid, "Jobs Listing");
        
     }
     
@@ -94,7 +84,7 @@ public class AddJobStepDefinitions {
          theActorInTheSpotlight().attemptsTo
          (SelectFromOptions.byVisibleText(duration).from(AddJobPage.JOB_DURATION));
          theActorInTheSpotlight().attemptsTo(Add.jobDate(date));
-         takeScreenshot("Adding Job");
+         imagium.takeScreenshot(navigationPage.getDriver(), uuid, "Adding Job");
          theActorInTheSpotlight().attemptsTo(Click.on(AddJobPage.SUBMIT));
     }
     
@@ -102,7 +92,6 @@ public class AddJobStepDefinitions {
     public void heIsAbleToSeeTheNewJobAdded() {
         ((JavascriptExecutor) navigationPage.getDriver()).
         executeScript("function is_gif_image(i) {\n  return /^(?!data:).*\\.gif/i.test(i.src);\n}\n\nfunction freeze_gif(i) {\n  var c = document.createElement('canvas');\n  var w = c.width = i.width;\n var h = c.height = i.height;\n  c.getContext('2d').drawImage(i, 0, 0, w, h);\n  try {\n    i.src = c.toDataURL(\"image/gif\"); // if possible, retain all css aspects\n  } catch(e) { // cross-domain -- mimic original with all its tag attributes\n    for (var j = 0, a; a = i.attributes[j]; j++)\n      c.setAttribute(a.name, a.value);\n    i.parentNode.replaceChild(c, i);\n  }\n}\n\n\n[].slice.apply(document.images).filter(is_gif_image).map(freeze_gif);");
-        takeScreenshot("New Job board");
-    
+        imagium.takeScreenshot(navigationPage.getDriver(), uuid, "New Job board");    
     }
 }

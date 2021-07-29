@@ -8,9 +8,14 @@ import net.thucydides.core.util.SystemEnvironmentVariables;
 import java.io.IOException;
 import net.thucydides.core.webdriver.WebDriverFacade;
 import org.json.simple.JSONObject;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Imagium {
-    
+    private final Logger log = LoggerFactory.getLogger(Imagium.class);
     //Get unique Test ID for a specific project using Rest Assured
     public static String getUID(String testName, String projectKey) {
         try {
@@ -30,7 +35,7 @@ public class Imagium {
         }
     }
 
-    	//Post a request for validation
+    //Post a request for validation
 	public static void postRequest(String stepName, String uid, String imagebase64) throws IOException {
 		RequestSpecification request1 = RestAssured.given();
 		request1.header("content-type", "application/json");
@@ -45,4 +50,14 @@ public class Imagium {
 		System.out.println("Response from Imagium: " + response_id1);
 	}
 
+    public void takeScreenshot(WebDriver webdriver, String uuid, String testName) {
+        String scrBase64 = "";
+        scrBase64 = (((TakesScreenshot) webdriver).getScreenshotAs(OutputType.BASE64));
+        try {
+            log.info("UUID: " + uuid);
+            postRequest(testName, uuid, scrBase64);
+        } catch(Exception e) {
+            log.info("Exception caught");
+        }
+    }
 }
