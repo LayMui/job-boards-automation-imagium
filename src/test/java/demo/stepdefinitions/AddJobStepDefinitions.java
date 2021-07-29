@@ -86,12 +86,11 @@ public class AddJobStepDefinitions {
 	}
 
     public void takeScreenshot(String testName) {
-       // uid = imagium.getUID(testName,  System.getenv("IMAGIUM_API_KEY"));
         String scrBase64 = "";
         scrBase64 = ((TakesScreenshot) navigationPage.getDriver()).getScreenshotAs(OutputType.BASE64);
         try {
             log.info("UUID: " + uuid);
-            Imagium.postRequest(testName, uuid, scrBase64);
+            postRequest(testName, uuid, scrBase64);
         } catch(Exception e) {
             log.info("Exception caught");
         }

@@ -10,8 +10,6 @@ import net.thucydides.core.webdriver.WebDriverFacade;
 import org.json.simple.JSONObject;
 
 public class Imagium {
-
-
     //Get unique Test ID for a specific project using Rest Assured
     public static String getUID(String testName, String projectKey) {
         try {
