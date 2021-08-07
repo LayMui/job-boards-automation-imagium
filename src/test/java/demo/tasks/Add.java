@@ -8,6 +8,23 @@ import net.serenitybdd.screenplay.actions.*;
 
 public class Add {
 
+    public static Performable aNewJob(String name) {
+        return Task.where(
+                "{0} attempts to enter job name #name",
+                Click.on(NavigationPage.ADD_JOB),
+                Clear.field(AddJobPage.JOB_NAME),
+                Enter.theValue(name).into(AddJobPage.JOB_NAME))
+                .with("name")
+                .of(name);
+    }
+
+    public static Performable jobDuration(String duration) {
+        return Task.where(
+                "{0} attempts to enter job duration #duration",
+                (SelectFromOptions.byVisibleText(duration).from(AddJobPage.JOB_DURATION)));
+    }
+   
+
     public static Performable jobName(String name) {
         return Task.where(
                 "{0} attempts to enter job name #name",

@@ -79,13 +79,11 @@ public class AddJobStepDefinitions {
     
     @When("^(?:.*) add a new job with name \"([^\"]*)\" duration \"([^\"]*)\" and \"([^\"]*)\"")
     public void jamesAddANewJobWithNameDurationAnd(String name, String duration, String date) {
-         theActorInTheSpotlight().attemptsTo(Click.on(NavigationPage.ADD_JOB));
-         theActorInTheSpotlight().attemptsTo(Add.jobName(name));
-         theActorInTheSpotlight().attemptsTo
-         (SelectFromOptions.byVisibleText(duration).from(AddJobPage.JOB_DURATION));
-         theActorInTheSpotlight().attemptsTo(Add.jobDate(date));
-         imagium.takeScreenshot(navigationPage.getDriver(), uuid, "Adding Job");
-         theActorInTheSpotlight().attemptsTo(Click.on(AddJobPage.SUBMIT));
+        theActorInTheSpotlight().attemptsTo(Add.aNewJob(name));
+        theActorInTheSpotlight().attemptsTo(Add.jobDuration(duration));
+        theActorInTheSpotlight().attemptsTo(Add.jobDate(date));
+        imagium.takeScreenshot(navigationPage.getDriver(), uuid, "Adding Job");
+        theActorInTheSpotlight().attemptsTo(Click.on(AddJobPage.SUBMIT));
     }
     
     @Then("^he is able to see the new job added$")
