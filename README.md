@@ -199,3 +199,6 @@ $ mvn clean verify -Denvironment=staging
 ![Link an image](https://docs.microsoft.com/learn/azure-devops/shared/media/mara.png)
 
 [Link to Microsoft Learn MarkDown](https://docs.microsoft.com/en-gb/learn/modules/communicate-using-markdown/2-what-is-markdown)
+
+xref:
+https://www.toolsqa.com/selenium-cucumber-framework/sharing-test-context-between-cucumber-step-definitions/
